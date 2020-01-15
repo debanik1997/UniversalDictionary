@@ -77,9 +77,9 @@ class SpreadsheetViewController: UIViewController {
     }
     
     func showPopup(translation: Translation, id: String) {
-        let ingredientPopupVC = IngredientPopupViewController(nibName: nil, bundle: nil)
+        let popupVC = PopupViewController(nibName: nil, bundle: nil)
         let popup = PopupDialog(
-            viewController: ingredientPopupVC,
+            viewController: popupVC,
             buttonAlignment: .horizontal,
             tapGestureDismissal: false) {
         }
@@ -88,14 +88,14 @@ class SpreadsheetViewController: UIViewController {
         }
         
         let add = DefaultButton(title: "Add") {
-            guard let translationText = ingredientPopupVC.getNewTranslation() else { return }
+            guard let translationText = popupVC.getNewTranslation() else { return }
 //            self.addTranslation(ingredientName, id)
             popup.dismiss()
         }
-        ingredientPopupVC.translation = translation
+        popupVC.translation = translation
         popup.addButton(cancel)
         popup.addButton(add)
-        ingredientPopupVC.popup = popup
+        popupVC.popup = popup
         self.present(popup, animated: true, completion: nil)
     }
 }
