@@ -19,8 +19,8 @@
 		399C300A23CA96A600C4BB89 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399C300923CA96A600C4BB89 /* Word.swift */; };
 		399C300E23CA9E2300C4BB89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 399C300D23CA9E2300C4BB89 /* GoogleService-Info.plist */; };
 		399C301023CDB21C00C4BB89 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399C300F23CDB21C00C4BB89 /* HomeViewController.swift */; };
-		399C301223CDB9FE00C4BB89 /* IngredientPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399C301123CDB9FE00C4BB89 /* IngredientPopupViewController.swift */; };
-		399C301423CDBA2100C4BB89 /* IngredientPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399C301323CDBA2100C4BB89 /* IngredientPopupView.swift */; };
+		399C301223CDB9FE00C4BB89 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399C301123CDB9FE00C4BB89 /* PopupViewController.swift */; };
+		399C301423CDBA2100C4BB89 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399C301323CDBA2100C4BB89 /* PopupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,8 +39,8 @@
 		399C300923CA96A600C4BB89 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		399C300D23CA9E2300C4BB89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		399C300F23CDB21C00C4BB89 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		399C301123CDB9FE00C4BB89 /* IngredientPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientPopupViewController.swift; sourceTree = "<group>"; };
-		399C301323CDBA2100C4BB89 /* IngredientPopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientPopupView.swift; sourceTree = "<group>"; };
+		399C301123CDB9FE00C4BB89 /* PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		399C301323CDBA2100C4BB89 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		8A17151256507B0FF7F0992A /* Pods-UniversalDictionary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalDictionary.release.xcconfig"; path = "Target Support Files/Pods-UniversalDictionary/Pods-UniversalDictionary.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +102,7 @@
 		399C300223C977C100C4BB89 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				399C301123CDB9FE00C4BB89 /* IngredientPopupViewController.swift */,
+				399C301123CDB9FE00C4BB89 /* PopupViewController.swift */,
 				3970087523C76AAA00BB2529 /* SpreadsheetViewController.swift */,
 				399C300F23CDB21C00C4BB89 /* HomeViewController.swift */,
 			);
@@ -112,7 +112,7 @@
 		399C300323C977DC00C4BB89 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				399C301323CDBA2100C4BB89 /* IngredientPopupView.swift */,
+				399C301323CDBA2100C4BB89 /* PopupView.swift */,
 				399C300023C971CB00C4BB89 /* Cells.swift */,
 			);
 			path = Views;
@@ -256,10 +256,10 @@
 				399C300123C971CB00C4BB89 /* Cells.swift in Sources */,
 				399C301023CDB21C00C4BB89 /* HomeViewController.swift in Sources */,
 				3970087223C76AAA00BB2529 /* AppDelegate.swift in Sources */,
-				399C301223CDB9FE00C4BB89 /* IngredientPopupViewController.swift in Sources */,
+				399C301223CDB9FE00C4BB89 /* PopupViewController.swift in Sources */,
 				3970087423C76AAA00BB2529 /* SceneDelegate.swift in Sources */,
 				399C300623C9E13F00C4BB89 /* UniversalDictionary.swift in Sources */,
-				399C301423CDBA2100C4BB89 /* IngredientPopupView.swift in Sources */,
+				399C301423CDBA2100C4BB89 /* PopupView.swift in Sources */,
 				399C300823CA956A00C4BB89 /* Translation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

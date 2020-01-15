@@ -9,12 +9,12 @@
 import UIKit
 import PopupDialog
 
-final class IngredientPopupViewController: UIViewController {
+final class PopupViewController: UIViewController {
     
     public weak var popup: PopupDialog?
     
-    fileprivate var baseView: IngredientPopupView {
-        return view as! IngredientPopupView
+    fileprivate var baseView: PopupView {
+        return view as! PopupView
     }
     
     public var translation = Translation() {
@@ -22,7 +22,7 @@ final class IngredientPopupViewController: UIViewController {
     }
 
     override func loadView() {
-        view = IngredientPopupView(frame: .zero)
+        view = PopupView(frame: .zero)
     }
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ final class IngredientPopupViewController: UIViewController {
     }
 }
 
-extension IngredientPopupViewController: UITableViewDataSource {
+extension PopupViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return translation.translations.count
