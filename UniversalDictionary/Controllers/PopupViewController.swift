@@ -35,7 +35,7 @@ final class PopupViewController: UIViewController {
     
     func getNewTranslation() -> String? {
 //        return baseView.newTranslationText.
-        return ""
+        return baseView.textField.text
     }
 }
 

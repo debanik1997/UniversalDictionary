@@ -12,5 +12,6 @@ target 'UniversalDictionary' do
   # Optionally, include the Swift extensions if you're using Swift.
   pod 'FirebaseFirestoreSwift'
   pod 'PopupDialog', '~> 1.1'
+  pod 'iOSDropDown'
 
 end

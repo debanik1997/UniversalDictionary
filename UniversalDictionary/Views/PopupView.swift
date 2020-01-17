@@ -21,27 +21,50 @@ class PopupView: UIView {
     }()
     
     // The table view
-   lazy var tableView: UITableView = {
-       let tv = UITableView(frame: .zero)
-       tv.translatesAutoresizingMaskIntoConstraints = false
-       return tv
-   }()
+    lazy var tableView: UITableView = {
+        let tv = UITableView(frame: .zero)
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
+    }()
+    
+    lazy var textField: UITextField = {
+        let tf = UITextField(frame: .zero)
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.backgroundColor = .gray
+        tf.placeholder = "Add a translation"
+        return tf
+    }()
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
-        // Add views
-        addSubview(titleLabel)
         addSubview(tableView)
         
         // Setup constraints
         heightAnchor.constraint(equalToConstant: 220).isActive = true
         
-        var constraints = [NSLayoutConstraint]()
-        let views: [String: UIView] = ["titleLabel": titleLabel, "tableView": tableView]
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[tableView]-30-|", options: [], metrics: nil, views: views)
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[titleLabel(50)][tableView]|", options: [], metrics: nil, views: views)
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[titleLabel]|", options: [], metrics: nil, views: views)
-        NSLayoutConstraint.activate(constraints)
+        addSubview(titleLabel)
+        let titleLabelConstraints = [
+           titleLabel.topAnchor.constraint(equalTo: topAnchor),
+           titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
+           titleLabel.heightAnchor.constraint(equalToConstant: 50)
+        ]
+        NSLayoutConstraint.activate(titleLabelConstraints)
+        
+        let tableViewConstraints = [
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            tableView.heightAnchor.constraint(equalToConstant: 100),
+            tableView.widthAnchor.constraint(equalTo: widthAnchor)
+        ]
+        NSLayoutConstraint.activate(tableViewConstraints)
+        
+        addSubview(textField)
+        let textFieldConstraints = [
+            textField.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            textField.bottomAnchor.constraint(equalTo: bottomAnchor),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ]
+        NSLayoutConstraint.activate(textFieldConstraints)
     }
 }

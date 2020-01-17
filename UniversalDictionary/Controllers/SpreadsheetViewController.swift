@@ -15,14 +15,20 @@ import PopupDialog
 class SpreadsheetViewController: UIViewController {
     weak var spreadsheetView: SpreadsheetView!
     
-    var translations = ["hello": "hola",
-                        "goodbye": "adios", "good": "bueno", "bad": "malo"
-                        ]
-    var languages = ["ben", "tjg"]
+    var codes = ["ben": "Bengali", "spa": "Spanish", "aar": "Afar"]
     var translationsDict = [Translation]()
     var universalDictionary = UniversalDictionary(translations: [Translation]())
     var translationsRef: DocumentReference!
-
+    var languageCode: String?
+    init(languageCode: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.languageCode = languageCode
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         super.loadView()
         let spreadsheetView = SpreadsheetView(frame: .zero)
@@ -56,15 +62,15 @@ class SpreadsheetViewController: UIViewController {
         translationsDict.append(Translation(englishKey: "goodbye", translations: ["adios"]))
     }
     func getDictionary(translationRef: DocumentReference) {
-        translationsRef.collection("ben").getDocuments() { (querySnapshot, err) in
+        translationsRef.collection(self.languageCode!).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 var translations = [Translation]()
                 for document in querySnapshot!.documents {
                     let engWord = document.data()["englishWord"] as! String
-                    let translationString = document.data()["translation"] as! String
-                    let translation = Translation(englishKey: engWord, translations: translationString.components(separatedBy: ", "))
+                    let translationArray = document.data()["translation"] as! [String]
+                    let translation = Translation(englishKey: engWord, translations: translationArray)
                     translations.append(translation)
                 }
                 self.translationsDict = translations
@@ -89,7 +95,7 @@ class SpreadsheetViewController: UIViewController {
         
         let add = DefaultButton(title: "Add") {
             guard let translationText = popupVC.getNewTranslation() else { return }
-//            self.addTranslation(ingredientName, id)
+            self.addTranslation(translationText: translationText, id: id)
             popup.dismiss()
         }
         popupVC.translation = translation
@@ -97,6 +103,16 @@ class SpreadsheetViewController: UIViewController {
         popup.addButton(add)
         popupVC.popup = popup
         self.present(popup, animated: true, completion: nil)
+    }
+    
+    func addTranslation(translationText: String, id: String) {
+        let docRef = self.translationsRef.collection(self.languageCode!).document(id)
+        docRef.updateData([
+            "translation": FieldValue.arrayUnion([translationText])
+        ])
+        DispatchQueue.main.async {
+            self.spreadsheetView.reloadData()
+        }
     }
 }
 
@@ -142,7 +158,7 @@ extension SpreadsheetViewController: SpreadsheetViewDataSource {
             if indexPath.column == 0 {
                 cell.label.text = "English"
             } else {
-                cell.label.text = "Bengali"
+                cell.label.text = self.codes[self.languageCode ?? ""] ?? "Unknown language"
             }
             cell.backgroundColor = .cyan
             return cell
@@ -161,6 +177,9 @@ extension SpreadsheetViewController: SpreadsheetViewDataSource {
 
 extension SpreadsheetViewController: SpreadsheetViewDelegate {
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.row == 0) {
+            return
+        }
         let engWord = self.translationsDict[indexPath.row-1].englishKey
         let translations = self.translationsDict[indexPath.row-1].translations
         let translation = self.translationsDict[indexPath.row-1]

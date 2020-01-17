@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         button.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(button)
-        button.backgroundColor = .cyan
+        button.backgroundColor = .red
         button.setTitle("Get Dictionary", for: .normal)
         button.titleLabel?.textColor = .black
         let buttonConstraints = [
@@ -30,11 +30,24 @@ class HomeViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(buttonConstraints)
         button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
-        self.view.backgroundColor = .white
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(textField)
+        textField.placeholder = "Enter 3 digit language code (lowercase)..."
+        let textFieldConstraints = [
+           textField.widthAnchor.constraint(equalToConstant: 300),
+           textField.heightAnchor.constraint(equalToConstant: 100),
+           textField.bottomAnchor.constraint(equalTo: button.topAnchor),
+           textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+       ]
+        NSLayoutConstraint.activate(textFieldConstraints)
+        self.view.backgroundColor = .lightGray
     }
     
     @objc func buttonClicked(sender : UIButton){
-        self.navigationController!.pushViewController(SpreadsheetViewController(), animated: true)
+        if (textField.text != nil || textField.text != "") {
+            self.navigationController!.pushViewController(SpreadsheetViewController(languageCode: textField.text!), animated: true)
+        }
     }
 }
 
