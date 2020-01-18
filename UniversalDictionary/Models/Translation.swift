@@ -9,15 +9,18 @@
 import Foundation
 
 struct Translation {
+    var id: String
     var englishKey: String
     var translations: [String]
     
     init() {
+        self.id = ""
         self.englishKey = ""
         self.translations = [String]()
     }
     
-    init(englishKey: String, translations: [String]) {
+    init(id: String, englishKey: String, translations: [String]) {
+        self.id = id
         self.englishKey = englishKey
         self.translations = translations
     }

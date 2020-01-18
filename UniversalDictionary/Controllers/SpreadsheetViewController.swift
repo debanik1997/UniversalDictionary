@@ -56,11 +56,11 @@ class SpreadsheetViewController: UIViewController {
 //        self.getDictionaryTest()
     }
     
-    func getDictionaryTest() {
-        self.translationsDict = [Translation]()
-        translationsDict.append(Translation(englishKey: "hello", translations: ["hola"]))
-        translationsDict.append(Translation(englishKey: "goodbye", translations: ["adios"]))
-    }
+//    func getDictionaryTest() {
+//        self.translationsDict = [Translation]()
+//        translationsDict.append(Translation(englishKey: "hello", translations: ["hola"]))
+//        translationsDict.append(Translation(englishKey: "goodbye", translations: ["adios"]))
+//    }
     func getDictionary(translationRef: DocumentReference) {
         translationsRef.collection(self.languageCode!).getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -70,7 +70,8 @@ class SpreadsheetViewController: UIViewController {
                 for document in querySnapshot!.documents {
                     let engWord = document.data()["englishWord"] as! String
                     let translationArray = document.data()["translation"] as! [String]
-                    let translation = Translation(englishKey: engWord, translations: translationArray)
+                    let id = document.documentID
+                    let translation = Translation(id: id, englishKey: engWord, translations: translationArray)
                     translations.append(translation)
                 }
                 self.translationsDict = translations
@@ -110,9 +111,12 @@ class SpreadsheetViewController: UIViewController {
         docRef.updateData([
             "translation": FieldValue.arrayUnion([translationText])
         ])
-        DispatchQueue.main.async {
-            self.spreadsheetView.reloadData()
-        }
+//        let index = self.translationsDict.lastIndex(where: )
+        
+//        let idxPath = IndexPath(item: index!, section: 0)
+//        DispatchQueue.main.async {
+//            self.spreadsheetView.reloadData()
+//        }
     }
 }
 
